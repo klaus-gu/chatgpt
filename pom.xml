@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>xyz.openai</groupId>
+    <artifactId>chatgpt</artifactId>
+    <version>${reversion}</version>
+    
+    <name>chatgpt</name>
+    <description>ChatGPT client</description>
+    
+    <packaging>pom</packaging>
+    <properties>
+        <reversion>1.0.0-SNAPSHOT</reversion>
+        <java.version>1.8</java.version>
+        <moshi.version>1.11.0</moshi.version>
+        <okhttp.version>3.14.9</okhttp.version>
+    </properties>
+    
+    <modules>
+        <module>chatgpt-client</module>
+        <module>chatgpt-client-spring</module>
+    </modules>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>xyz.openai</groupId>
+                <artifactId>chatgpt-client</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>xyz.openai</groupId>
+                <artifactId>chatgpt-client-spring</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>5.3.24</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>2.0.25</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.12.0</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>4.4</version>
+            </dependency>
+    
+            <dependency>
+                <groupId>com.squareup.moshi</groupId>
+                <artifactId>moshi</artifactId>
+                <version>${moshi.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+    
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark</artifactId>
+                <version>0.62.2</version>
+            </dependency>
+    
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-http</artifactId>
+                <version>5.8.15</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.21</version>
+                <optional>true</optional>
+            </dependency>
+    
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.2.3</version>
+                <optional>true</optional>
+            </dependency>
+    
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>1.2.3</version>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <optional>true</optional>
+        </dependency>
+    
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <optional>true</optional>
+        </dependency>
+    
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+
+</project>
