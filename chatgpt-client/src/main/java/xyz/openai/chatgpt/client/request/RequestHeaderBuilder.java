@@ -1,6 +1,7 @@
-package xyz.openai.chatgpt.client.builder;
+package xyz.openai.chatgpt.client.request;
 
-import xyz.openai.chatgpt.client.config.OpenAIConfiguration;
+import xyz.openai.chatgpt.client.auth.AuthorizationDelegate;
+import xyz.openai.chatgpt.client.setting.OpenAISetting;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,19 +13,17 @@ import java.util.Map;
  **/
 public class RequestHeaderBuilder {
     
-    private static final RequestHeaderBuilder REQUEST_HEADER_BUILDER = new RequestHeaderBuilder();
-    
     private final Map<String, String> headers = new HashMap<String, String>();
     
-    private OpenAIConfiguration openAIConfiguration = OpenAIConfiguration.getInstance();
+    private final OpenAISetting openAISetting;
     
-    public static RequestHeaderBuilder getInstance() {
-        return REQUEST_HEADER_BUILDER;
+    public RequestHeaderBuilder(OpenAISetting openAISetting) {
+        this.openAISetting = openAISetting;
     }
     
-    public Map<String, String> getChatGPTHeaders() {
+    public Map<String, String> getTextDavinci002RenderShaHeaders() {
         headers.put("Accept", "text/event-stream");
-        headers.put("Authorization", "Bearer " + openAIConfiguration.getAccessToken());
+        headers.put("Authorization", "Bearer " + AuthorizationDelegate.getInstance(openAISetting).getAuthorization());
         headers.put("Content-Type", "application/json");
         headers.put("X-Openai-Assistant-App-Id", "");
         headers.put("Connection", "close");
@@ -36,7 +35,7 @@ public class RequestHeaderBuilder {
     }
     
     public Map<String, String> getGPT35TurboHeaders() {
-        headers.put("Authorization", "Bearer " + openAIConfiguration.getApiKey());
+        headers.put("Authorization", "Bearer " + AuthorizationDelegate.getInstance(openAISetting).getAuthorization());
         headers.put("Content-Type", "application/json");
         return headers;
     }

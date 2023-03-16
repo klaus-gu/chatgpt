@@ -1,11 +1,11 @@
-package xyz.openai.chatgpt.client.core;
+package xyz.openai.chatgpt.client.auth;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import xyz.openai.chatgpt.client.config.OpenAIConfiguration;
-import xyz.openai.chatgpt.client.model.OpenAIAuth;
-import xyz.openai.chatgpt.client.model.OpenAISession;
+import xyz.openai.chatgpt.client.setting.OpenAISetting;
+import xyz.openai.chatgpt.client.entity.OpenAIAuth;
+import xyz.openai.chatgpt.client.entity.OpenAISession;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -19,13 +19,12 @@ public class TokenManager {
     
     private static final Logger LOG = LoggerFactory.getLogger(TokenManager.class);
     
-    private static final TokenManager TOKEN_MANAGER = new TokenManager();
+    private final OpenAISetting openAISetting ;
     
-    private OpenAIConfiguration openAIConfiguration = OpenAIConfiguration.getInstance();
-    
-    public static TokenManager getInstance() {
-        return TOKEN_MANAGER;
+    public TokenManager(OpenAISetting openAISetting) {
+        this.openAISetting = openAISetting;
     }
+    
     
     public String refreshToken(String email, String password) {
         String title = StringUtils.isNotEmpty(email) && StringUtils.isNotEmpty(password) ? "OpenAI: Login"
@@ -46,25 +45,25 @@ public class TokenManager {
     
     public String doRefreshToken(String email, String password) {
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
-            if (StringUtils.isEmpty(openAIConfiguration.getEmail()) || StringUtils
-                    .isEmpty(openAIConfiguration.getPassword())) {
+            if (StringUtils.isEmpty(openAISetting.email) || StringUtils
+                    .isEmpty(openAISetting.password)) {
                 
                 return "No login details provided! To login or refresh access token, the email and password are required, please configure it at first.";
             } else {
-                email = openAIConfiguration.getEmail();
-                password = openAIConfiguration.getPassword();
+                email = openAISetting.email;
+                password = openAISetting.password;
             }
         }
         OpenAIAuth auth;
-        if (openAIConfiguration.getEnableProxy()) {
-            auth = new OpenAIAuth(email, password, openAIConfiguration.getProxy());
+        if (openAISetting.enableContext) {
+            auth = new OpenAIAuth(email, password, openAISetting.getProxy());
         } else {
             auth = new OpenAIAuth(email, password);
         }
         try {
             OpenAISession sessions = auth.auth();
-            openAIConfiguration.setExpireTime(sessions.getExpires());
-            openAIConfiguration.setAccessToken(sessions.getAccessToken());
+            openAISetting.expireTime = (sessions.getExpires());
+            openAISetting.accessToken =(sessions.getAccessToken());
             String image = URLDecoder.decode(sessions.getUser().getImage(), StandardCharsets.UTF_8.toString());
             return "success";
         } catch (Exception e) {

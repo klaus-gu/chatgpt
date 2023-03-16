@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.model;
+package xyz.openai.chatgpt.client.entity;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;

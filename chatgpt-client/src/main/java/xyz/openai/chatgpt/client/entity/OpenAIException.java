@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.model;
+package xyz.openai.chatgpt.client.entity;
 
 /**
  * 自定义异常 .

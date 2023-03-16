@@ -3,8 +3,12 @@ package xyz.openai.chatgpt.client.parser;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import xyz.openai.chatgpt.client.core.ConversationManager;
+import xyz.openai.chatgpt.client.ConversationManager;
+import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
 import xyz.openai.chatgpt.client.util.HtmlUtil;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 解析 .
@@ -58,14 +62,35 @@ public class ChatGPTResponseParser {
         ParseResult parseResult = new ParseResult();
         parseResult.source = HtmlUtil.md2html(result.toString());
         parseResult.html = HtmlUtil.md2html(result.toString());
+        parseResult.id = object.getString("id");
         return parseResult;
+    }
+    
+    public static List<GPT35TurboRequest.Message> parseGPT35TurboToMessage(String response) {
+        JSONObject object = JSON.parseObject(response);
+        JSONArray resultArray = object.getJSONArray("choices");
+        List<GPT35TurboRequest.Message> messageList = new LinkedList<>();
+        for (Object s : resultArray) {
+            JSONObject choice = JSON.parseObject(s.toString());
+            JSONObject messages = choice.getJSONObject("message");
+            GPT35TurboRequest.Message message = JSONObject
+                    .parseObject(messages.toString(), GPT35TurboRequest.Message.class);
+            messageList.add(message);
+        }
+        return messageList;
     }
     
     public static class ParseResult {
         
+        private String id;
+        
         private String source;
         
         private String html;
+        
+        public String getId() {
+            return id;
+        }
         
         public String getSource() {
             return source;

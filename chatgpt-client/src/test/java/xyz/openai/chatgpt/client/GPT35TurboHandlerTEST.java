@@ -1,14 +1,23 @@
 package xyz.openai.chatgpt.client;
 
+import xyz.openai.chatgpt.client.entity.OpenAIException;
+import xyz.openai.chatgpt.client.handler.GPTHandlerDelegate;
+import xyz.openai.chatgpt.client.enums.ModelTypeEnum;
+import xyz.openai.chatgpt.client.setting.OpenAISetting;
+
 /**
- * TODO .
+ * ${@link GPTHandlerDelegate} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/
 public class GPT35TurboHandlerTEST {
     
-    public static void main(String[] args) {
-        GPT35TurboHandler handler = new GPT35TurboHandler();
-        System.out.println(handler.handle("who are you?"));
+    public static void main(String[] args) throws OpenAIException {
+        OpenAISetting openAISetting = new OpenAISetting();
+        openAISetting.modelToUse = ModelTypeEnum.GPT35_TRUBO;
+        openAISetting.apiKey = ("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");
+        //        openAIConfiguration.setEnableProxy(true);
+        new GPTHandlerDelegate(openAISetting).handle("who are you?");
+        
     }
 }

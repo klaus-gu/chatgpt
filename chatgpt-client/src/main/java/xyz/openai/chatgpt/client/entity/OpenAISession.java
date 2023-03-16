@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.model;
+package xyz.openai.chatgpt.client.entity;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;

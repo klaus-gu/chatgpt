@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.config;
+package xyz.openai.chatgpt.client.setting;
 
 /**
  * Enums .

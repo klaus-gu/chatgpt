@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.model;
+package xyz.openai.chatgpt.client.entity;
 
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;

@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.core;
+package xyz.openai.chatgpt.client;
 
 import java.util.UUID;
 

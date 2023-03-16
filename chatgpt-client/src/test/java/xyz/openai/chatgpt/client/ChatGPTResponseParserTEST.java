@@ -3,7 +3,7 @@ package xyz.openai.chatgpt.client;
 import xyz.openai.chatgpt.client.parser.ChatGPTResponseParser;
 
 /**
- * TODO .
+ * ${@link ChatGPTResponseParser} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/
