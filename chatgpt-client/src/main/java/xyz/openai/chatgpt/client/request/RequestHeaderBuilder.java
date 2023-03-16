@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * TODO .
+ * 请求头构造 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/
 public class RequestHeaderBuilder {
     
-    private final Map<String, String> headers = new HashMap<String, String>();
+    private final Map<String, String> headers = new HashMap<>();
     
     private final OpenAISetting openAISetting;
     

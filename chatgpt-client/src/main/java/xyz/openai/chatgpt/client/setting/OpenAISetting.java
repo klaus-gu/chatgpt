@@ -20,7 +20,7 @@ public class OpenAISetting {
     
     public String password = "";
     
-    public Boolean enableProxy = false;
+    public boolean enableProxy = false;
     
     public String proxyHostname = "";
     
@@ -32,7 +32,7 @@ public class OpenAISetting {
     
     public String apiKey = "";
     
-    public Boolean enableContext = false;
+    public boolean enableContext = false;
     
     public String assistantApiKey = "";
     

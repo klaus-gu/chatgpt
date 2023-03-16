@@ -6,6 +6,7 @@ import xyz.openai.chatgpt.client.entity.OpenAIResponse;
 import xyz.openai.chatgpt.client.enums.ModelTypeEnum;
 import xyz.openai.chatgpt.client.handler.GPTHandlerDelegate;
 import xyz.openai.chatgpt.client.setting.OpenAISetting;
+import xyz.openai.chatgpt.client.util.OpenAISettingCheckUtil;
 
 /**
  * OpenAI 开放功能 .
@@ -31,6 +32,7 @@ public class OpenAI {
             
             public OpenAIResponse<GPT35TurboRequest.Message> handle(GPT35TurboRequest.Message... message)
                     throws OpenAIException {
+                OpenAISettingCheckUtil.check(openAISetting);
                 GPTHandlerDelegate<GPT35TurboRequest.Message,OpenAIResponse<GPT35TurboRequest.Message>> delegate = new GPTHandlerDelegate<GPT35TurboRequest.Message,OpenAIResponse<GPT35TurboRequest.Message>>(openAISetting);
                 return delegate.handle(message);
             }
@@ -48,10 +50,9 @@ public class OpenAI {
             }
             
             public OpenAIResponse handle(String... message) throws OpenAIException {
+                OpenAISettingCheckUtil.check(openAISetting);
                 GPTHandlerDelegate delegate = new GPTHandlerDelegate(openAISetting);
                 final String handle = (String) delegate.handle(message);
-                System.out.println(handle);
-                System.out.println(openAISetting);
                 return new OpenAIResponse();
             }
         }

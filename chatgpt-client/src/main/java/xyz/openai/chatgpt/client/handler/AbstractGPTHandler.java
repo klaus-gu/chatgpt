@@ -16,7 +16,7 @@ abstract class AbstractGPTHandler<M,R> {
     
     protected final OpenAISetting openAISetting;
     
-    public AbstractGPTHandler(OpenAISetting openAISetting) {
+    protected AbstractGPTHandler(OpenAISetting openAISetting) {
         this.openAISetting = openAISetting;
     }
     
