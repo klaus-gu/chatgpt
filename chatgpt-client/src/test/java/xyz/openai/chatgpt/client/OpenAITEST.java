@@ -17,11 +17,11 @@ public class OpenAITEST {
     
     public static void main(String[] args) throws OpenAIException {
         OpenAISetting openAISetting = new OpenAISetting();
-        openAISetting.apiKey="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";
-        openAISetting.enableProxy=true;
-        openAISetting.proxyHostname="127.0.0.1";
-        openAISetting.proxyPort="7890";
-        openAISetting.proxyType= SettingConfiguration.SettingProxyType.SOCKS;
+        openAISetting.apiKey="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";
+//        openAISetting.enableProxy=true;
+//        openAISetting.proxyHostname="127.0.0.1";
+//        openAISetting.proxyPort="7890";
+//        openAISetting.proxyType= SettingConfiguration.SettingProxyType.SOCKS;
         final OpenAIResponse handle = OpenAI.ChatGPT.ChatGPT35Turbo.config(openAISetting)
                 .handle(new GPT35TurboRequest.Message(RoleEnum.USER.getRoleName(), "who are you ?"));
         System.out.println(JSON.toJSONString(handle));
