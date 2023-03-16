@@ -16,7 +16,7 @@ public class OpenAITEST {
     
     public static void main(String[] args) throws OpenAIException {
         OpenAISetting openAISetting = new OpenAISetting();
-        openAISetting.apiKey="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";
+        openAISetting.apiKey="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";
         final OpenAIResponse handle = OpenAI.ChatGPT.ChatGPT35Turbo.config(openAISetting)
                 .handle(new GPT35TurboRequest.Message(RoleEnum.USER.getRoleName(), "who are you ?"));
         System.out.println(JSON.toJSONString(handle));

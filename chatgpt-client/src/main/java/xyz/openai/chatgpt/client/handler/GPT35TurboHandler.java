@@ -44,6 +44,7 @@ class GPT35TurboHandler
         }
         OpenAIResponse<GPT35TurboRequest.Message> messageOpenAIResponse = new OpenAIResponse<>();
         messageOpenAIResponse.ress = ChatGPTResponseParser.parseGPT35TurboToMessage(response.body());
+        messageOpenAIResponse.id = ChatGPTResponseParser.parseGPT35TurboConversationId(response.body());
         return messageOpenAIResponse;
     }
     

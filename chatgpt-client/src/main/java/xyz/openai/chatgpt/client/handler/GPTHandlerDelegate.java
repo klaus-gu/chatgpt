@@ -12,7 +12,7 @@ import java.util.Map;
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/
-public class GPTHandlerDelegate {
+public class GPTHandlerDelegate<M,R> {
     
     protected final OpenAISetting openAISetting;
     
@@ -31,7 +31,7 @@ public class GPTHandlerDelegate {
         return openAISetting.modelToUse;
     }
     
-    public Object handle(Object... objects) throws OpenAIException {
-        return handlerMap.get(getType()).handle(objects);
+    public R handle(M... objects) throws OpenAIException {
+        return (R)handlerMap.get(getType()).handle(objects);
     }
 }

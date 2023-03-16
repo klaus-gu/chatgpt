@@ -66,6 +66,11 @@ public class ChatGPTResponseParser {
         return parseResult;
     }
     
+    public static String parseGPT35TurboConversationId(String response) {
+        JSONObject object = JSON.parseObject(response);
+        return object.getString("id");
+    }
+    
     public static List<GPT35TurboRequest.Message> parseGPT35TurboToMessage(String response) {
         JSONObject object = JSON.parseObject(response);
         JSONArray resultArray = object.getJSONArray("choices");

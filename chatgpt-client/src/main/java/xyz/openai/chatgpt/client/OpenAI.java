@@ -31,8 +31,8 @@ public class OpenAI {
             
             public OpenAIResponse<GPT35TurboRequest.Message> handle(GPT35TurboRequest.Message... message)
                     throws OpenAIException {
-                GPTHandlerDelegate delegate = new GPTHandlerDelegate(openAISetting);
-                return (OpenAIResponse<GPT35TurboRequest.Message>) delegate.handle(message);
+                GPTHandlerDelegate<GPT35TurboRequest.Message,OpenAIResponse<GPT35TurboRequest.Message>> delegate = new GPTHandlerDelegate<GPT35TurboRequest.Message,OpenAIResponse<GPT35TurboRequest.Message>>(openAISetting);
+                return delegate.handle(message);
             }
         }
         
