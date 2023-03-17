@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 用于处理 GPT35Turbo 的模型注解 .
+ * Used to process GPT35Turbo model .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/
@@ -14,5 +14,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface GPT35Turbo {
 
-
+    boolean enableConversation() default false;
+    
 }
