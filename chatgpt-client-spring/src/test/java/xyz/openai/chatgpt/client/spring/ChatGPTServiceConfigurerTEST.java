@@ -5,12 +5,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
 import xyz.openai.chatgpt.client.entity.OpenAIResponse;
 import xyz.openai.chatgpt.client.enums.RoleEnum;
-import xyz.openai.chatgpt.client.spring.annotation.ChatGPTScan;
-import xyz.openai.chatgpt.client.spring.scan.ChatGPTScannerConfiguration;
+import xyz.openai.chatgpt.client.spring.core.annotation.ChatGPTScan;
+import xyz.openai.chatgpt.client.spring.core.scan.ChatGPTScannerConfiguration;
 import xyz.openai.chatgpt.client.spring.service.ChatGPTService01;
 
 /**
- * ${@link xyz.openai.chatgpt.client.spring.registry.ChatGPTServiceConfigurer} .
+ * ${@link xyz.openai.chatgpt.client.spring.core.registry.ChatGPTServiceConfigurer} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/

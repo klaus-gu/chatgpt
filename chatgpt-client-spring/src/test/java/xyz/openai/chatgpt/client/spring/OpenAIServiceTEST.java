@@ -2,7 +2,7 @@ package xyz.openai.chatgpt.client.spring;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
-import xyz.openai.chatgpt.client.spring.annotation.ChatGPTScan;
+import xyz.openai.chatgpt.client.spring.core.annotation.ChatGPTScan;
 import xyz.openai.chatgpt.client.spring.service.ChatGPTService01;
 
 /**

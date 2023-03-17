@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.spring.registry;
+package xyz.openai.chatgpt.client.spring.core.registry;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -6,11 +6,11 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
-import xyz.openai.chatgpt.client.spring.annotation.ChatGPTScan;
-import xyz.openai.chatgpt.client.spring.scan.ChatGPTScannerConfiguration;
+import xyz.openai.chatgpt.client.spring.core.annotation.ChatGPTScan;
+import xyz.openai.chatgpt.client.spring.core.scan.ChatGPTScannerConfiguration;
 
 /**
- * ${@link xyz.openai.chatgpt.client.spring.scan.ChatGPTScannerConfiguration} .
+ * ${@link xyz.openai.chatgpt.client.spring.core.scan.ChatGPTScannerConfiguration} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/

@@ -1,7 +1,7 @@
 package xyz.openai.chatgpt.client.spring.service;
 
 import xyz.openai.chatgpt.client.setting.OpenAISetting;
-import xyz.openai.chatgpt.client.spring.factory.OpenAISettingFactory;
+import xyz.openai.chatgpt.client.spring.core.factory.OpenAISettingFactory;
 
 /**
  * Mock .
@@ -13,7 +13,7 @@ public class MyOpenAISettingFactory implements OpenAISettingFactory {
     @Override
     public OpenAISetting getSetting() {
         final OpenAISetting openAISetting = new OpenAISetting();
-        openAISetting.apiKey = "sk-***";
+        openAISetting.apiKey = "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";
         return openAISetting;
     }
 }

@@ -1,5 +1,6 @@
 package xyz.openai.chatgpt.client.entity;
 
+import org.apache.commons.lang3.StringUtils;
 import xyz.openai.chatgpt.client.enums.ModelTypeEnum;
 
 import java.util.LinkedList;
@@ -54,9 +55,17 @@ public class GPT35TurboRequest {
     
     public static class Message {
         
+        private String conversationId;
+        
         private String role;
         
         private String content;
+        
+        public Message(String conversationId, String role, String content) {
+            this.conversationId = conversationId;
+            this.role = role;
+            this.content = content;
+        }
         
         public Message(String role, String content) {
             this.role = role;
@@ -65,6 +74,17 @@ public class GPT35TurboRequest {
         
         public Message() {
         
+        }
+        
+        @Override
+        public String toString() {
+            if (StringUtils.isEmpty(conversationId)) {
+                return "Message{" + '\'' + ", role='" + role + '\''
+                        + ", content='" + content + '\'' + '}';
+            } else {
+                return "Message{" + "conversationId='" + conversationId + '\'' + ", role='" + role + '\''
+                        + ", content='" + content + '\'' + '}';
+            }
         }
         
         public String getRole() {
@@ -82,10 +102,13 @@ public class GPT35TurboRequest {
         public void setContent(String content) {
             this.content = content;
         }
-        
-        @Override
-        public String toString() {
-            return "Message{" + "role='" + role + '\'' + ", content='" + content + '\'' + '}';
+    
+        public String getConversationId() {
+            return conversationId;
+        }
+    
+        public void setConversationId(String conversationId) {
+            this.conversationId = conversationId;
         }
     }
 }

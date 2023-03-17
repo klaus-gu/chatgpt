@@ -1,13 +1,10 @@
-package xyz.openai.chatgpt.client.spring.scan;
+package xyz.openai.chatgpt.client.spring.core.scan;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
-
-import java.lang.annotation.Annotation;
 
 /**
  * ${@link ChatGPTScanner} .

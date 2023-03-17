@@ -1,6 +1,6 @@
-package xyz.openai.chatgpt.client.spring.annotation;
+package xyz.openai.chatgpt.client.spring.core.annotation;
 
-import xyz.openai.chatgpt.client.spring.factory.OpenAISettingFactory;
+import xyz.openai.chatgpt.client.spring.core.factory.OpenAISettingFactory;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

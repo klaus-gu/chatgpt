@@ -1,11 +1,11 @@
-package xyz.openai.chatgpt.client.spring.factory;
+package xyz.openai.chatgpt.client.spring.core.factory;
 
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
 import xyz.openai.chatgpt.client.OpenAI;
 import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
-import xyz.openai.chatgpt.client.setting.OpenAISetting;
-import xyz.openai.chatgpt.client.spring.annotation.GPT35Turbo;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapper;
+import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
@@ -37,8 +37,15 @@ public class ChatGPTServiceProxyFactory {
         
         private final OpenAISettingFactory openAISettingFactory;
         
+        private final ConversationMapper conversationMapper;
+    
         public ChatGPTServiceProxy(OpenAISettingFactory openAISettingFactory) {
+            this(openAISettingFactory,null);
+        }
+    
+        public ChatGPTServiceProxy(OpenAISettingFactory openAISettingFactory, ConversationMapper conversationMapper) {
             this.openAISettingFactory = openAISettingFactory;
+            this.conversationMapper = conversationMapper;
         }
         
         @Override
@@ -55,6 +62,9 @@ public class ChatGPTServiceProxyFactory {
                     messages.add((GPT35TurboRequest.Message) firstArg);
                 } else if (firstArg instanceof List) {
                     messages = (List<GPT35TurboRequest.Message>) firstArg;
+                }
+                if (annotationAttributes.get("enableContext") !=null && annotationAttributes.getBoolean("enableContext")){
+                
                 }
                 GPT35TurboRequest.Message[] messagesArr = messages.toArray(new GPT35TurboRequest.Message[] {});
                 result = OpenAI.ChatGPT.ChatGPT35Turbo.config(openAISettingFactory.getSetting()).handle(messagesArr);

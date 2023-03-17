@@ -1,4 +1,6 @@
-package xyz.openai.chatgpt.client.spring.annotation;
+package xyz.openai.chatgpt.client.spring.core.annotation;
+
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapper;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,6 +16,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface GPT35Turbo {
 
-    boolean enableConversation() default false;
+    boolean enableContext() default false;
+    
+    Class<? extends ConversationMapper> conversationMapper() default ConversationMapper.class;
     
 }

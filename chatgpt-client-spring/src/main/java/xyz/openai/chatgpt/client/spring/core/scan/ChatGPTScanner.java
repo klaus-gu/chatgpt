@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.spring.scan;
+package xyz.openai.chatgpt.client.spring.core.scan;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
@@ -9,14 +9,17 @@ import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ClassUtils;
-import xyz.openai.chatgpt.client.spring.annotation.ChatGPTClient;
-import xyz.openai.chatgpt.client.spring.factory.ChatGPTClientFactoryBean;
-import xyz.openai.chatgpt.client.spring.factory.ChatGPTServiceProxyFactory;
-import xyz.openai.chatgpt.client.spring.factory.OpenAISettingFactory;
-import xyz.openai.chatgpt.client.spring.rule.ChatGPTUsageSpecification;
+import xyz.openai.chatgpt.client.spring.core.annotation.ChatGPTClient;
+import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
+import xyz.openai.chatgpt.client.spring.core.factory.ChatGPTClientFactoryBean;
+import xyz.openai.chatgpt.client.spring.core.factory.ChatGPTServiceProxyFactory;
+import xyz.openai.chatgpt.client.spring.core.factory.OpenAISettingFactory;
+import xyz.openai.chatgpt.client.spring.core.rule.ChatGPTUsageSpecification;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,15 +56,37 @@ public class ChatGPTScanner extends ClassPathBeanDefinitionScanner {
             try {
                 Class actualBeanClass = ClassUtils.forName(beanClassName, this.registry.getClass().getClassLoader());
                 ChatGPTUsageSpecification.methodSpecificationValidation(Arrays.asList(actualBeanClass.getMethods()));
-                processChatGPTSetting(actualBeanClass,beanDefinition);
+                processChatGPTSetting(actualBeanClass, beanDefinition);
+                
                 beanDefinition.getPropertyValues().addPropertyValue("chatGPTClient", actualBeanClass);
-                ChatGPTServiceProxyFactory.getProxy(actualBeanClass,(OpenAISettingFactory) beanDefinition.getPropertyValues().get("openAISettingFactory"));
+                ChatGPTServiceProxyFactory.getProxy(actualBeanClass,
+                        (OpenAISettingFactory) beanDefinition.getPropertyValues().get("openAISettingFactory"));
                 beanDefinition.setBeanClass(ChatGPTClientFactoryBean.class);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
     }
+    
+    private void processConversationContext(Class actualClazz, AbstractBeanDefinition beanDefinition) {
+        Method[] methods = actualClazz.getMethods();
+        if (methods.length > 0) {
+            List<Method> methodList = Arrays.asList(methods);
+            for (Method method : methodList) {
+                if (method.isAnnotationPresent(GPT35Turbo.class)) {
+                    Annotation annotation = method.getAnnotation(GPT35Turbo.class);
+                    AnnotationAttributes annotationAttributes = AnnotationAttributes
+                            .fromMap(AnnotationUtils.getAnnotationAttributes(annotation));
+                    // enableContext = true
+                    if (annotationAttributes.get("enableContext") != null && annotationAttributes
+                            .getBoolean("enableContext")) {
+                        
+                    }
+                }
+            }
+        }
+    }
+    
     
     private void processChatGPTSetting(Class actualClazz, AbstractBeanDefinition beanDefinition) {
         Annotation annotation = actualClazz.getAnnotation(ChatGPTClient.class);
@@ -73,8 +98,8 @@ public class ChatGPTScanner extends ClassPathBeanDefinitionScanner {
                 Class clazz = (Class<? extends OpenAISettingFactory>) settingFactory;
                 final OpenAISettingFactory openAISettingFactory = BeanUtils
                         .instantiateClass(clazz, OpenAISettingFactory.class);
-               beanDefinition.getPropertyValues().addPropertyValue("openAISettingFactory",openAISettingFactory);
-               return;
+                beanDefinition.getPropertyValues().addPropertyValue("openAISettingFactory", openAISettingFactory);
+                return;
             }
         }
         throw new IllegalArgumentException(

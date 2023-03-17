@@ -1,8 +1,8 @@
-package xyz.openai.chatgpt.client.spring.rule;
+package xyz.openai.chatgpt.client.spring.core.rule;
 
 import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
 import xyz.openai.chatgpt.client.entity.OpenAIResponse;
-import xyz.openai.chatgpt.client.spring.annotation.GPT35Turbo;
+import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

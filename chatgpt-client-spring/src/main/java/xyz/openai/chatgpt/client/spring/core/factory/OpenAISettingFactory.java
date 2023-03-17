@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.spring.factory;
+package xyz.openai.chatgpt.client.spring.core.factory;
 
 import xyz.openai.chatgpt.client.setting.OpenAISetting;
 
