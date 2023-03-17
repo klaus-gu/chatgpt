@@ -15,11 +15,11 @@ import xyz.openai.chatgpt.client.util.OpenAISettingCheckUtil;
  **/
 public class OpenAI {
     
-    static class ChatGPT {
+    public static class ChatGPT {
         
         private static OpenAISetting openAISetting = null;
         
-        static class ChatGPT35Turbo extends ChatGPT {
+        public static class ChatGPT35Turbo extends ChatGPT {
             
             public static ChatGPT35Turbo chatGPT35Turbo = null;
             
@@ -33,12 +33,13 @@ public class OpenAI {
             public OpenAIResponse<GPT35TurboRequest.Message> handle(GPT35TurboRequest.Message... message)
                     throws OpenAIException {
                 OpenAISettingCheckUtil.check(openAISetting);
-                GPTHandlerDelegate<GPT35TurboRequest.Message,OpenAIResponse<GPT35TurboRequest.Message>> delegate = new GPTHandlerDelegate<GPT35TurboRequest.Message,OpenAIResponse<GPT35TurboRequest.Message>>(openAISetting);
+                GPTHandlerDelegate<GPT35TurboRequest.Message, OpenAIResponse<GPT35TurboRequest.Message>> delegate = new GPTHandlerDelegate<GPT35TurboRequest.Message, OpenAIResponse<GPT35TurboRequest.Message>>(
+                        openAISetting);
                 return delegate.handle(message);
             }
         }
         
-        static class TextDavinci002RenderSha extends ChatGPT {
+        public static class TextDavinci002RenderSha extends ChatGPT {
             
             public static TextDavinci002RenderSha textDavinci002RenderSha = null;
             

@@ -15,7 +15,7 @@ public class GPT35TurboHandlerTEST {
     public static void main(String[] args) throws OpenAIException {
         OpenAISetting openAISetting = new OpenAISetting();
         openAISetting.modelToUse = ModelTypeEnum.GPT35_TRUBO;
-        openAISetting.apiKey = ("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");
+        openAISetting.apiKey = ("sk-*******PSY");
         //        openAIConfiguration.setEnableProxy(true);
         new GPTHandlerDelegate(openAISetting).handle("who are you?");
         

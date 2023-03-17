@@ -1,5 +1,7 @@
 package xyz.openai.chatgpt.client.spring.annotation;
 
+import xyz.openai.chatgpt.client.setting.OpenAISetting;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

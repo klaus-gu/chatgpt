@@ -17,7 +17,7 @@ public class OpenAITEST {
     
     public static void main(String[] args) throws OpenAIException {
         OpenAISetting openAISetting = new OpenAISetting();
-        openAISetting.apiKey="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";
+        openAISetting.apiKey="sk-*******VFN";
 //        openAISetting.enableProxy=true;
 //        openAISetting.proxyHostname="127.0.0.1";
 //        openAISetting.proxyPort="7890";
