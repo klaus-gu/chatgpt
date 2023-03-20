@@ -79,8 +79,7 @@ public class GPT35TurboRequest {
         @Override
         public String toString() {
             if (StringUtils.isEmpty(conversationId)) {
-                return "Message{" + '\'' + ", role='" + role + '\''
-                        + ", content='" + content + '\'' + '}';
+                return "Message{" + '\'' + ", role='" + role + '\'' + ", content='" + content + '\'' + '}';
             } else {
                 return "Message{" + "conversationId='" + conversationId + '\'' + ", role='" + role + '\''
                         + ", content='" + content + '\'' + '}';
@@ -102,11 +101,11 @@ public class GPT35TurboRequest {
         public void setContent(String content) {
             this.content = content;
         }
-    
+        
         public String getConversationId() {
             return conversationId;
         }
-    
+        
         public void setConversationId(String conversationId) {
             this.conversationId = conversationId;
         }

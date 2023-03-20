@@ -8,6 +8,8 @@ import xyz.openai.chatgpt.client.handler.GPTHandlerDelegate;
 import xyz.openai.chatgpt.client.setting.OpenAISetting;
 import xyz.openai.chatgpt.client.util.OpenAISettingCheckUtil;
 
+import java.util.Arrays;
+
 /**
  * OpenAI 开放功能 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
@@ -33,6 +35,9 @@ public class OpenAI {
             public OpenAIResponse<GPT35TurboRequest.Message> handle(GPT35TurboRequest.Message... message)
                     throws OpenAIException {
                 OpenAISettingCheckUtil.check(openAISetting);
+                for (GPT35TurboRequest.Message message1 : message) {
+                    message1.setConversationId(null);
+                }
                 GPTHandlerDelegate<GPT35TurboRequest.Message, OpenAIResponse<GPT35TurboRequest.Message>> delegate = new GPTHandlerDelegate<GPT35TurboRequest.Message, OpenAIResponse<GPT35TurboRequest.Message>>(
                         openAISetting);
                 return delegate.handle(message);

@@ -4,11 +4,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ClassUtils;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapper;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperFactory;
 import xyz.openai.chatgpt.client.spring.core.annotation.ChatGPTClient;
 import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
 import xyz.openai.chatgpt.client.spring.core.factory.ChatGPTClientFactoryBean;
@@ -18,6 +21,7 @@ import xyz.openai.chatgpt.client.spring.core.rule.ChatGPTUsageSpecification;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -57,10 +61,10 @@ public class ChatGPTScanner extends ClassPathBeanDefinitionScanner {
                 Class actualBeanClass = ClassUtils.forName(beanClassName, this.registry.getClass().getClassLoader());
                 ChatGPTUsageSpecification.methodSpecificationValidation(Arrays.asList(actualBeanClass.getMethods()));
                 processChatGPTSetting(actualBeanClass, beanDefinition);
-                
+                processConversationContext(actualBeanClass,beanDefinition);
                 beanDefinition.getPropertyValues().addPropertyValue("chatGPTClient", actualBeanClass);
                 ChatGPTServiceProxyFactory.getProxy(actualBeanClass,
-                        (OpenAISettingFactory) beanDefinition.getPropertyValues().get("openAISettingFactory"));
+                        (OpenAISettingFactory) beanDefinition.getPropertyValues().get("openAISettingFactory"),(ConversationMapperFactory) beanDefinition.getPropertyValues().get("conversationMapperFactory"));
                 beanDefinition.setBeanClass(ChatGPTClientFactoryBean.class);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -80,13 +84,19 @@ public class ChatGPTScanner extends ClassPathBeanDefinitionScanner {
                     // enableContext = true
                     if (annotationAttributes.get("enableContext") != null && annotationAttributes
                             .getBoolean("enableContext")) {
-                        
+                        // check if conversationMapper is right set
+                        Object conversationMapperFactory = annotationAttributes.get("conversationMapperFactory");
+                        if (conversationMapperFactory.getClass().isInterface() || Modifier.isAbstract(conversationMapperFactory.getClass().getModifiers())){
+                            throw new IllegalArgumentException("[@GPT35Turbo#conversationMapperFactory()] Expected to be a concrete class，but find interface or abstract class");
+                        }
+                        Class clazz = (Class<? extends ConversationMapperFactory>)conversationMapperFactory;
+                        ConversationMapperFactory factory = BeanUtils.instantiateClass(clazz,ConversationMapperFactory.class);
+                        beanDefinition.getPropertyValues().addPropertyValue("conversationMapperFactory",factory);
                     }
                 }
             }
         }
     }
-    
     
     private void processChatGPTSetting(Class actualClazz, AbstractBeanDefinition beanDefinition) {
         Annotation annotation = actualClazz.getAnnotation(ChatGPTClient.class);

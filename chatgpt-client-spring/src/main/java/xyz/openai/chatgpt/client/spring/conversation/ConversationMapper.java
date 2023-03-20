@@ -1,6 +1,6 @@
 package xyz.openai.chatgpt.client.spring.conversation;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * TODO .
@@ -9,10 +9,10 @@ import java.util.LinkedList;
  **/
 public interface ConversationMapper<T> {
     
-    LinkedList<T> getContext(String conversationId);
+    List<T> getContext(String conversationId);
     
-    void saveContext(LinkedList<T> contexts);
+    void saveContext(List<T> contexts);
     
-    LinkedList<T> appendContext(String conversationId,LinkedList<T> contexts);
-
+    List<T> appendContext(String conversationId, List<T> contexts);
+    
 }
