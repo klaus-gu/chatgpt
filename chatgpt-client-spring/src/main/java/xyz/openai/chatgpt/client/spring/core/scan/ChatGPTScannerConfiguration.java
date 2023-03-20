@@ -22,9 +22,13 @@ public class ChatGPTScannerConfiguration implements BeanDefinitionRegistryPostPr
         chatGPTScanner.setAnnotationClass(this.annotationClass);
         chatGPTScanner.setBasePackages(this.basePackages);
         chatGPTScanner.addIncludeFilter(new AnnotationTypeFilter(this.annotationClass));
-        chatGPTScanner.addIncludeFilter((metadataReader, metadataReaderFactory) -> true);
+        chatGPTScanner.addExcludeFilter((metadataReader, metadataReaderFactory) -> {
+            if (!metadataReader.getAnnotationMetadata().hasAnnotation(annotationClass.getName())) {
+                return true;
+            }
+            return false;
+        });
         chatGPTScanner.scan(this.basePackages);
-        
     }
     
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory)

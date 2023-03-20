@@ -13,7 +13,8 @@ public class MyOpenAISettingFactory implements OpenAISettingFactory {
     @Override
     public OpenAISetting getSetting() {
         final OpenAISetting openAISetting = new OpenAISetting();
-        openAISetting.apiKey = "sk-7**********************5vNAyZrEqU3AU";
+        openAISetting.apiKey = "sk-7ip********************EqU3AU";
+        openAISetting.enableRequestDebug = true;
         return openAISetting;
     }
 }

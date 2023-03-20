@@ -11,8 +11,6 @@ public interface ConversationMapper<T> {
     
     List<T> getContext(String conversationId);
     
-    void saveContext(List<T> contexts);
-    
     List<T> appendContext(String conversationId, List<T> contexts);
     
 }

@@ -1,6 +1,9 @@
-package xyz.openai.chatgpt.client.spring.conversation;
+package xyz.openai.chatgpt.client.spring.service;
 
+import org.apache.commons.collections4.CollectionUtils;
 import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapper;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperFactory;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,12 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/
-public class DefaultGPT35TurboConversationMapperFactory
+public class MyDefaultGPT35TurboConversationMapperFactory
         implements ConversationMapperFactory<GPT35TurboRequest.Message> {
     
-    private final ConversationMapper<GPT35TurboRequest.Message> conversationMapper = new DefaultGPT35TurboConversationMapper();
+    private final ConversationMapper<GPT35TurboRequest.Message> conversationMapper = new MyDefaultGPT35TurboConversationMapper();
     
-    public DefaultGPT35TurboConversationMapperFactory() {
+    public MyDefaultGPT35TurboConversationMapperFactory() {
     }
     
     @Override
@@ -23,11 +26,11 @@ public class DefaultGPT35TurboConversationMapperFactory
         return conversationMapper;
     }
     
-    public static class DefaultGPT35TurboConversationMapper implements ConversationMapper<GPT35TurboRequest.Message> {
+    public static class MyDefaultGPT35TurboConversationMapper implements ConversationMapper<GPT35TurboRequest.Message> {
         
         private final ConcurrentHashMap<String, List<GPT35TurboRequest.Message>> conversationContextMap = new ConcurrentHashMap<>();
         
-        public DefaultGPT35TurboConversationMapper() {
+        public MyDefaultGPT35TurboConversationMapper() {
         }
         
         @Override
@@ -41,11 +44,11 @@ public class DefaultGPT35TurboConversationMapperFactory
             final List<GPT35TurboRequest.Message> oldContext = getContext(conversationId);
             if (oldContext == null) {
                 newContexts.forEach(message -> message.setConversationId(conversationId));
-                conversationContextMap.put(conversationId, newContexts);
-            } else {
+                conversationContextMap.put(conversationId,newContexts);
+            }else {
                 oldContext.addAll(newContexts);
                 oldContext.forEach(message -> message.setConversationId(conversationId));
-                conversationContextMap.put(conversationId, oldContext);
+                conversationContextMap.put(conversationId,oldContext);
             }
             return getContext(conversationId);
         }

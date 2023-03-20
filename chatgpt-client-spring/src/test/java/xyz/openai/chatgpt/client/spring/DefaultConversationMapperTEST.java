@@ -27,7 +27,7 @@ public class DefaultConversationMapperTEST {
         List<GPT35TurboRequest.Message> list = new LinkedList<>();
         list.add(message1);
         list.add(message2);
-        mapper.saveContext(list);
+        mapper.appendContext(convrsationId,list);
         System.out.println(mapper.getContext(convrsationId));
     
         GPT35TurboRequest.Message message3 = new GPT35TurboRequest.Message(convrsationId, RoleEnum.USER.getRoleName(),"i'm");

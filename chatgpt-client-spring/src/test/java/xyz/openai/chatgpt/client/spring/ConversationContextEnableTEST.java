@@ -7,6 +7,9 @@ import xyz.openai.chatgpt.client.enums.RoleEnum;
 import xyz.openai.chatgpt.client.spring.core.annotation.ChatGPTScan;
 import xyz.openai.chatgpt.client.spring.service.ChatGPTContextService;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * conversationMapper .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
@@ -20,22 +23,34 @@ public class ConversationContextEnableTEST {
         applicationContext.register(ConversationContextEnableTEST.class);
         applicationContext.refresh();
         ChatGPTContextService contextService = applicationContext.getBean(ChatGPTContextService.class);
-        
-        System.err.println("Q: " + "who are you?");
-        final OpenAIResponse<GPT35TurboRequest.Message> chat0 = contextService
-                .chat(new GPT35TurboRequest.Message("0001", RoleEnum.USER.getRoleName(), "who are you?"));
-        System.out.println("A: " + chat0.ress.get(0).getContent());
-        
-        System.err.println("Q: " + "if i ask 'tony' , you should answer me 'what can i do for you?',understand?");
+//        List<GPT35TurboRequest.Message> messages = new LinkedList<>();
+//        messages.add(new GPT35TurboRequest.Message(RoleEnum.USER.getRoleName(),"who are you?"));
+//        System.out.println(contextService.chat(messages));
+
+        System.err.println("Q: " + "if i ask 'tony' , you should always answer me 'what can i do for you? my friend',understand?");
         final OpenAIResponse<GPT35TurboRequest.Message> chat1 = contextService
                 .chat(new GPT35TurboRequest.Message("0001", RoleEnum.USER.getRoleName(),
                         "if i ask 'tony' , you should answer me 'what can i do for you?',understand?"));
         System.out.println("A: " + chat1.ress.get(0).getContent());
-        
-        System.err.println("Q: " + "i tony");
+
+        System.err.println("Q: " + "tony");
         final OpenAIResponse<GPT35TurboRequest.Message> chat2 = contextService
-                .chat(new GPT35TurboRequest.Message("0001", RoleEnum.USER.getRoleName(), "hi tony"));
+                .chat(new GPT35TurboRequest.Message("0001", RoleEnum.USER.getRoleName(), "tony"));
         System.out.println("A: " + chat2.ress.get(0).getContent());
+    
+        System.out.println("\r ======================");
+        
+        System.err.println("Q: " + "tony");
+        final OpenAIResponse<GPT35TurboRequest.Message> chat3 = contextService
+                .chat(new GPT35TurboRequest.Message("0002", RoleEnum.USER.getRoleName(), "tony"));
+        System.out.println("A: " + chat3.ress.get(0).getContent());
+    
+        System.out.println("\r ======================");
+    
+        System.err.println("Q: " + "tony");
+        final OpenAIResponse<GPT35TurboRequest.Message> chat4 = contextService
+                .chat(new GPT35TurboRequest.Message("0003", RoleEnum.USER.getRoleName(), "tony"));
+        System.out.println("A: " + chat4.ress.get(0).getContent());
         
         applicationContext.close();
     }

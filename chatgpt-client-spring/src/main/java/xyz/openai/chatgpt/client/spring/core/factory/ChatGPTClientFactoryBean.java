@@ -1,7 +1,10 @@
 package xyz.openai.chatgpt.client.spring.core.factory;
 
 import org.springframework.beans.factory.FactoryBean;
-import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperFactory;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapper;
+
+import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * ${@link FactoryBean} .
@@ -14,7 +17,7 @@ public class ChatGPTClientFactoryBean implements FactoryBean {
     
     private OpenAISettingFactory openAISettingFactory;
     
-    private ConversationMapperFactory conversationMapperFactory;
+    private Map<Method, ConversationMapper> conversationMapperCache;
     
     public ChatGPTClientFactoryBean(Class chatGPTClient) {
         this.chatGPTClient = chatGPTClient;
@@ -22,7 +25,7 @@ public class ChatGPTClientFactoryBean implements FactoryBean {
     
     @Override
     public Object getObject() throws Exception {
-        return ChatGPTServiceProxyFactory.getProxy(chatGPTClient, openAISettingFactory, conversationMapperFactory);
+        return ChatGPTServiceProxyFactory.getProxy(chatGPTClient, openAISettingFactory, conversationMapperCache);
     }
     
     @Override
@@ -51,11 +54,11 @@ public class ChatGPTClientFactoryBean implements FactoryBean {
         this.openAISettingFactory = openAISettingFactory;
     }
     
-    public ConversationMapperFactory getConversationMapperFactory() {
-        return conversationMapperFactory;
+    public Map<Method, ConversationMapper> getConversationMapperCache() {
+        return conversationMapperCache;
     }
     
-    public void setConversationMapperFactory(ConversationMapperFactory conversationMapperFactory) {
-        this.conversationMapperFactory = conversationMapperFactory;
+    public void setConversationMapperCache(Map<Method, ConversationMapper> conversationMapperCache) {
+        this.conversationMapperCache = conversationMapperCache;
     }
 }

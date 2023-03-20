@@ -1,5 +1,8 @@
 package xyz.openai.chatgpt.client;
 
+import com.alibaba.fastjson2.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
 import xyz.openai.chatgpt.client.entity.OpenAIException;
 import xyz.openai.chatgpt.client.entity.OpenAIResponse;
@@ -23,6 +26,8 @@ public class OpenAI {
         
         public static class ChatGPT35Turbo extends ChatGPT {
             
+            private static final Logger LOG = LoggerFactory.getLogger(ChatGPT35Turbo.class);
+            
             public static ChatGPT35Turbo chatGPT35Turbo = null;
             
             public static ChatGPT35Turbo config(OpenAISetting openAISetting) {
@@ -32,15 +37,18 @@ public class OpenAI {
                 return chatGPT35Turbo;
             }
             
-            public OpenAIResponse<GPT35TurboRequest.Message> handle(GPT35TurboRequest.Message... message)
+            public OpenAIResponse<GPT35TurboRequest.Message> handle(GPT35TurboRequest.Message... messages)
                     throws OpenAIException {
                 OpenAISettingCheckUtil.check(openAISetting);
-                for (GPT35TurboRequest.Message message1 : message) {
+                if (openAISetting.enableRequestDebug){
+                    LOG.info(Arrays.asList(messages).toString());
+                }
+                for (GPT35TurboRequest.Message message1 : messages) {
                     message1.setConversationId(null);
                 }
                 GPTHandlerDelegate<GPT35TurboRequest.Message, OpenAIResponse<GPT35TurboRequest.Message>> delegate = new GPTHandlerDelegate<GPT35TurboRequest.Message, OpenAIResponse<GPT35TurboRequest.Message>>(
                         openAISetting);
-                return delegate.handle(message);
+                return delegate.handle(messages);
             }
         }
         
