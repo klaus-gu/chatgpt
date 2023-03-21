@@ -138,3 +138,4 @@ public class MyDefaultGPT35TurboConversationMapperFactory
 
 
 # Integrate with springboot
+[https://github.com/klaus-gu/chatgpt/tree/master/chatgpt-client-example/src/main/java/xyz/openai/chatgpt/client/example](https://)
