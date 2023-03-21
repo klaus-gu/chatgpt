@@ -19,7 +19,7 @@ System.out.println(JSON.toJSONString(handle));
 
 # ChatGPT Client Spring
 
-## Example
+## Simple Conversation Example
 
 #### Step One： Define an OpenAISettingFactory for OpenAISetting config
 
@@ -66,3 +66,68 @@ public class ChatGPTServiceConfigurerTEST {
 }
 ```
 
+## Enable Conversation Context Example
+
+#### Follow the step above , we need to enable it by set enableContext=true in annotation @GPT35Turbo
+
+```
+@GPT35Turbo(enableContext = true, conversationMapperFactory = MyDefaultGPT35TurboConversationMapperFactory.class)
+    OpenAIResponse<GPT35TurboRequest.Message> chat(GPT35TurboRequest.Message message);
+```
+
+#### After this ,we can chat with gpt-35-turbo model with context keeped.
+
+#### Also your can define your own ConversantionMapper by set a factory in annotation @GTP35Turbo
+
+```
+ @GPT35Turbo(enableContext = true, conversationMapperFactory = MyDefaultGPT35TurboConversationMapperFactory.class)
+    OpenAIResponse<GPT35TurboRequest.Message> chat(GPT35TurboRequest.Message message);
+```
+#### If not , a default ConversationMapper will be used.
+
+#### To define a ConversationMapper ,you should do as below
+
+```
+public class MyDefaultGPT35TurboConversationMapperFactory
+        implements ConversationMapperFactory<GPT35TurboRequest.Message> {
+    
+    private final ConversationMapper<GPT35TurboRequest.Message> conversationMapper = new MyDefaultGPT35TurboConversationMapper();
+    
+    public MyDefaultGPT35TurboConversationMapperFactory() {
+    }
+    
+    @Override
+    public ConversationMapper<GPT35TurboRequest.Message> getConversationMapper() {
+        return conversationMapper;
+    }
+    
+    public static class MyDefaultGPT35TurboConversationMapper implements ConversationMapper<GPT35TurboRequest.Message> {
+        
+        private final ConcurrentHashMap<String, List<GPT35TurboRequest.Message>> conversationContextMap = new ConcurrentHashMap<>();
+        
+        public MyDefaultGPT35TurboConversationMapper() {
+        }
+        
+        @Override
+        public List<GPT35TurboRequest.Message> getContext(String conversationId) {
+            return conversationContextMap.get(conversationId);
+        }
+        
+        @Override
+        public List<GPT35TurboRequest.Message> appendContext(String conversationId,
+                List<GPT35TurboRequest.Message> newContexts) {
+            final List<GPT35TurboRequest.Message> oldContext = getContext(conversationId);
+            if (oldContext == null) {
+                newContexts.forEach(message -> message.setConversationId(conversationId));
+                conversationContextMap.put(conversationId,newContexts);
+            }else {
+                oldContext.addAll(newContexts);
+                oldContext.forEach(message -> message.setConversationId(conversationId));
+                conversationContextMap.put(conversationId,oldContext);
+            }
+            return getContext(conversationId);
+        }
+    }
+}
+```
+#### You can define your own code in method getContext and appendContext.
