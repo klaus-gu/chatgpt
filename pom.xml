@@ -21,6 +21,7 @@
     <modules>
         <module>chatgpt-client</module>
         <module>chatgpt-client-spring</module>
+        <module>chatgpt-client-example</module>
     </modules>
     
     <dependencyManagement>
@@ -28,13 +29,19 @@
             <dependency>
                 <groupId>xyz.openai</groupId>
                 <artifactId>chatgpt-client</artifactId>
-                <version>${reversion}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             
             <dependency>
                 <groupId>xyz.openai</groupId>
                 <artifactId>chatgpt-client-spring</artifactId>
-                <version>${reversion}</version>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+    
+            <dependency>
+                <groupId>xyz.openai</groupId>
+                <artifactId>chatgpt-client-example</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             
             <dependency>
@@ -84,27 +91,6 @@
                 <artifactId>hutool-http</artifactId>
                 <version>5.8.15</version>
             </dependency>
-            
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.21</version>
-                <optional>true</optional>
-            </dependency>
-    
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.2.3</version>
-                <optional>true</optional>
-            </dependency>
-    
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>1.2.3</version>
-                <optional>true</optional>
-            </dependency>
     
             <dependency>
                 <groupId>org.junit</groupId>
@@ -130,25 +116,21 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
         </dependency>
-    
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <optional>true</optional>
-        </dependency>
-    
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <optional>true</optional>
-        </dependency>
-    
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
-
+    
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

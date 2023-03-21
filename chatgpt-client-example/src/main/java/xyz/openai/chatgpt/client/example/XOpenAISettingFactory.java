@@ -1,19 +1,19 @@
-package xyz.openai.chatgpt.client.spring.service;
+package xyz.openai.chatgpt.client.example;
 
 import xyz.openai.chatgpt.client.setting.OpenAISetting;
 import xyz.openai.chatgpt.client.spring.core.factory.OpenAISettingFactory;
 
 /**
- * Mock .
+ * TODO .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/
-public class MyOpenAISettingFactory implements OpenAISettingFactory {
+public class XOpenAISettingFactory implements OpenAISettingFactory {
     
     @Override
     public OpenAISetting getSetting() {
         final OpenAISetting openAISetting = new OpenAISetting();
-        openAISetting.apiKey = "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";
+        openAISetting.apiKey = "******";
         openAISetting.enableRequestDebug = true;
         return openAISetting;
     }

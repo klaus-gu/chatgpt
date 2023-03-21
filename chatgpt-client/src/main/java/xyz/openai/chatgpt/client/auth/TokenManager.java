@@ -1,11 +1,9 @@
 package xyz.openai.chatgpt.client.auth;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import xyz.openai.chatgpt.client.setting.OpenAISetting;
 import xyz.openai.chatgpt.client.entity.OpenAIAuth;
 import xyz.openai.chatgpt.client.entity.OpenAISession;
+import xyz.openai.chatgpt.client.setting.OpenAISetting;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -17,9 +15,7 @@ import java.nio.charset.StandardCharsets;
  **/
 public class TokenManager {
     
-    private static final Logger LOG = LoggerFactory.getLogger(TokenManager.class);
-    
-    private final OpenAISetting openAISetting ;
+    private final OpenAISetting openAISetting;
     
     public TokenManager(OpenAISetting openAISetting) {
         this.openAISetting = openAISetting;
@@ -33,7 +29,6 @@ public class TokenManager {
         try {
         
         } catch (Exception e) {
-            LOG.error("ChatGPT: refreshToken failed, message: {}", e.getMessage());
             refreshStatus = "Login or refresh token failed, please try it later. Use a proxy if necessary.";
         }
         return null;
@@ -45,8 +40,7 @@ public class TokenManager {
     
     public String doRefreshToken(String email, String password) {
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
-            if (StringUtils.isEmpty(openAISetting.email) || StringUtils
-                    .isEmpty(openAISetting.password)) {
+            if (StringUtils.isEmpty(openAISetting.email) || StringUtils.isEmpty(openAISetting.password)) {
                 
                 return "No login details provided! To login or refresh access token, the email and password are required, please configure it at first.";
             } else {
@@ -63,7 +57,7 @@ public class TokenManager {
         try {
             OpenAISession sessions = auth.auth();
             openAISetting.expireTime = (sessions.getExpires());
-            openAISetting.accessToken =(sessions.getAccessToken());
+            openAISetting.accessToken = (sessions.getAccessToken());
             String image = URLDecoder.decode(sessions.getUser().getImage(), StandardCharsets.UTF_8.toString());
             return "success";
         } catch (Exception e) {

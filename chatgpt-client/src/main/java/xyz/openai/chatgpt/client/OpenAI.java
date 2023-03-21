@@ -1,8 +1,5 @@
 package xyz.openai.chatgpt.client;
 
-import com.alibaba.fastjson2.JSON;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
 import xyz.openai.chatgpt.client.entity.OpenAIException;
 import xyz.openai.chatgpt.client.entity.OpenAIResponse;
@@ -10,8 +7,6 @@ import xyz.openai.chatgpt.client.enums.ModelTypeEnum;
 import xyz.openai.chatgpt.client.handler.GPTHandlerDelegate;
 import xyz.openai.chatgpt.client.setting.OpenAISetting;
 import xyz.openai.chatgpt.client.util.OpenAISettingCheckUtil;
-
-import java.util.Arrays;
 
 /**
  * OpenAI 开放功能 .
@@ -26,7 +21,6 @@ public class OpenAI {
         
         public static class ChatGPT35Turbo extends ChatGPT {
             
-            private static final Logger LOG = LoggerFactory.getLogger(ChatGPT35Turbo.class);
             
             public static ChatGPT35Turbo chatGPT35Turbo = null;
             
@@ -40,9 +34,6 @@ public class OpenAI {
             public OpenAIResponse<GPT35TurboRequest.Message> handle(GPT35TurboRequest.Message... messages)
                     throws OpenAIException {
                 OpenAISettingCheckUtil.check(openAISetting);
-                if (openAISetting.enableRequestDebug){
-                    LOG.info(Arrays.asList(messages).toString());
-                }
                 for (GPT35TurboRequest.Message message1 : messages) {
                     message1.setConversationId(null);
                 }
