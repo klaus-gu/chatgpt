@@ -12,7 +12,7 @@ import java.util.List;
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
  * @program chatgpt
  **/
-//@ChatGPTClient(settingFactory = MyOpenAISettingFactory.class)
+@ChatGPTClient(settingFactory = MyOpenAISettingFactory.class)
 public interface ChatGPTContextService {
     
     @GPT35Turbo(enableContext = true)
