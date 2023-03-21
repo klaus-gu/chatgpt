@@ -21,15 +21,15 @@ public class ConversationMapperRegistry implements BeanFactoryAware, SmartInitia
     
     private static final Map<Method, Class<? extends ConversationMapperFactory>> conversationMapperBeanClazzs = new ConcurrentHashMap<>();
     
-    private static final Map<Method,ConversationMapperFactory> conversationMappers = new ConcurrentHashMap<>();
+    private static final Map<Method, ConversationMapperFactory> conversationMappers = new ConcurrentHashMap<>();
     
     private BeanFactory beanFactory;
     
-    public static void registry(Method method, Class<? extends ConversationMapperFactory> clazz) {
+    public static void registerMapperClazz(Method method, Class<? extends ConversationMapperFactory> clazz) {
         conversationMapperClazzs.put(method, clazz);
     }
     
-    public static void registryMapperBeanClazz(Method method, Class<? extends ConversationMapperFactory> clazz) {
+    public static void registerMapperBeanClazz(Method method, Class<? extends ConversationMapperFactory> clazz) {
         conversationMapperBeanClazzs.put(method, clazz);
     }
     
@@ -39,20 +39,20 @@ public class ConversationMapperRegistry implements BeanFactoryAware, SmartInitia
     
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.beanFactory=beanFactory;
+        this.beanFactory = beanFactory;
     }
     
     @Override
     public void afterSingletonsInstantiated() {
         
-        for (Map.Entry<Method, Class<? extends ConversationMapperFactory>> entry : conversationMapperClazzs.entrySet()) {
+        for (Map.Entry<Method, Class<? extends ConversationMapperFactory>> entry : conversationMapperClazzs
+                .entrySet()) {
             conversationMappers.put(entry.getKey(), BeanUtils.instantiateClass(entry.getValue()));
         }
-        for (Map.Entry<Method, Class<? extends ConversationMapperFactory>> entry : conversationMapperBeanClazzs.entrySet()) {
-            conversationMappers.put(entry.getKey(),this.beanFactory.getBean(entry.getValue()));
+        for (Map.Entry<Method, Class<? extends ConversationMapperFactory>> entry : conversationMapperBeanClazzs
+                .entrySet()) {
+            conversationMappers.put(entry.getKey(), this.beanFactory.getBean(entry.getValue()));
         }
-    
-        conversationMappers.size();
     }
     
 }

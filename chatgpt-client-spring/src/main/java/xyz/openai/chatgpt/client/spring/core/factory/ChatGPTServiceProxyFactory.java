@@ -7,9 +7,9 @@ import xyz.openai.chatgpt.client.OpenAI;
 import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
 import xyz.openai.chatgpt.client.entity.OpenAIResponse;
 import xyz.openai.chatgpt.client.spring.conversation.ConversationMapper;
-import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperFactory;
 import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperRegistry;
 import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
+import xyz.openai.chatgpt.client.spring.core.registry.OpenAISettingFactoryRegistry;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
@@ -29,22 +29,15 @@ public class ChatGPTServiceProxyFactory {
     
     private static final Map<String, Object> httpServiceCache = new ConcurrentHashMap<String, Object>();
     
-    public static <T> T getProxy(Class<T> tClass, OpenAISettingFactory openAISettingFactory) {
+    public static <T> T getProxy(Class<T> tClass) {
         return (T) httpServiceCache.computeIfAbsent(tClass.getName(), (t) -> {
-            ChatGPTServiceProxy chatGPTServiceProxy = new ChatGPTServiceProxy(openAISettingFactory);
+            ChatGPTServiceProxy chatGPTServiceProxy = new ChatGPTServiceProxy();
             return Proxy.newProxyInstance(chatGPTServiceProxy.getClass().getClassLoader(), new Class[] {tClass},
                     chatGPTServiceProxy);
         });
     }
     
     static class ChatGPTServiceProxy implements InvocationHandler {
-        
-        private final OpenAISettingFactory openAISettingFactory;
-        
-        
-        public ChatGPTServiceProxy(OpenAISettingFactory openAISettingFactory) {
-            this.openAISettingFactory = openAISettingFactory;
-        }
         
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -78,10 +71,11 @@ public class ChatGPTServiceProxyFactory {
                     }
                     mapper.appendContext(conversationId, messages);
                     messages = mapper.getContext(conversationId);
-                    
                 }
                 GPT35TurboRequest.Message[] messagesArr = messages.toArray(new GPT35TurboRequest.Message[] {});
-                result = OpenAI.ChatGPT.ChatGPT35Turbo.config(openAISettingFactory.getSetting()).handle(messagesArr);
+                result = OpenAI.ChatGPT.ChatGPT35Turbo
+                        .config(OpenAISettingFactoryRegistry.getSetting(method.getDeclaringClass()))
+                        .handle(messagesArr);
                 if (annotationAttributes.get("enableContext") != null && annotationAttributes
                         .getBoolean("enableContext")) {
                     ConversationMapper mapper = ConversationMapperRegistry.getConversationMapper(method);

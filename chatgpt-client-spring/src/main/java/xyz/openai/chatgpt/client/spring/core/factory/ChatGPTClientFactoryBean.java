@@ -11,15 +11,13 @@ public class ChatGPTClientFactoryBean implements FactoryBean {
     
     private Class chatGPTClient;
     
-    private OpenAISettingFactory openAISettingFactory;
-    
     public ChatGPTClientFactoryBean(Class chatGPTClient) {
         this.chatGPTClient = chatGPTClient;
     }
     
     @Override
     public Object getObject() throws Exception {
-        return ChatGPTServiceProxyFactory.getProxy(chatGPTClient, openAISettingFactory);
+        return ChatGPTServiceProxyFactory.getProxy(chatGPTClient);
     }
     
     @Override
@@ -40,11 +38,4 @@ public class ChatGPTClientFactoryBean implements FactoryBean {
         this.chatGPTClient = chatGPTClient;
     }
     
-    public OpenAISettingFactory getOpenAISettingFactory() {
-        return openAISettingFactory;
-    }
-    
-    public void setOpenAISettingFactory(OpenAISettingFactory openAISettingFactory) {
-        this.openAISettingFactory = openAISettingFactory;
-    }
 }

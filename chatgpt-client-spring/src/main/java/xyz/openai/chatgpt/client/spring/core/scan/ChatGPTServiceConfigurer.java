@@ -1,4 +1,4 @@
-package xyz.openai.chatgpt.client.spring.core.registry;
+package xyz.openai.chatgpt.client.spring.core.scan;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -8,7 +8,7 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperRegistry;
 import xyz.openai.chatgpt.client.spring.core.annotation.ChatGPTScan;
-import xyz.openai.chatgpt.client.spring.core.scan.ChatGPTScannerConfiguration;
+import xyz.openai.chatgpt.client.spring.core.registry.OpenAISettingFactoryRegistry;
 
 /**
  * ${@link xyz.openai.chatgpt.client.spring.core.scan.ChatGPTScannerConfiguration} .
@@ -32,7 +32,14 @@ public class ChatGPTServiceConfigurer implements ImportBeanDefinitionRegistrar {
             }
             registry.registerBeanDefinition(ChatGPTScannerConfiguration.class.getName(), beanDefinition);
         }
-        BeanDefinition ConversationMapperRegistryBeanDefinition = BeanDefinitionBuilder.rootBeanDefinition(ConversationMapperRegistry.class).getBeanDefinition();
-        registry.registerBeanDefinition(ConversationMapperRegistry.class.getName(),ConversationMapperRegistryBeanDefinition);
+        BeanDefinition conversationMapperRegistryBeanDefinition = BeanDefinitionBuilder
+                .rootBeanDefinition(ConversationMapperRegistry.class).getBeanDefinition();
+        registry.registerBeanDefinition(ConversationMapperRegistry.class.getName(),
+                conversationMapperRegistryBeanDefinition);
+    
+        BeanDefinition openAISettingFactoryRegistryBeanDefinition = BeanDefinitionBuilder
+                .rootBeanDefinition(OpenAISettingFactoryRegistry.class).getBeanDefinition();
+        registry.registerBeanDefinition(OpenAISettingFactoryRegistry.class.getName(),
+                openAISettingFactoryRegistryBeanDefinition);
     }
 }

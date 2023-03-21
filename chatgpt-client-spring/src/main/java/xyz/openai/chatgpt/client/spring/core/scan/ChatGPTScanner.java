@@ -1,6 +1,5 @@
 package xyz.openai.chatgpt.client.spring.core.scan;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -17,6 +16,7 @@ import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
 import xyz.openai.chatgpt.client.spring.core.factory.ChatGPTClientFactoryBean;
 import xyz.openai.chatgpt.client.spring.core.factory.ChatGPTServiceProxyFactory;
 import xyz.openai.chatgpt.client.spring.core.factory.OpenAISettingFactory;
+import xyz.openai.chatgpt.client.spring.core.registry.OpenAISettingFactoryRegistry;
 import xyz.openai.chatgpt.client.spring.core.rule.ChatGPTUsageSpecification;
 
 import java.lang.annotation.Annotation;
@@ -63,8 +63,7 @@ public class ChatGPTScanner extends ClassPathBeanDefinitionScanner {
                 processChatGPTSetting(actualBeanClass, beanDefinition);
                 processConversationContext(actualBeanClass);
                 beanDefinition.getPropertyValues().addPropertyValue("chatGPTClient", actualBeanClass);
-                ChatGPTServiceProxyFactory.getProxy(actualBeanClass,
-                        (OpenAISettingFactory) beanDefinition.getPropertyValues().get("openAISettingFactory"));
+                ChatGPTServiceProxyFactory.getProxy(actualBeanClass);
                 beanDefinition.setBeanClass(ChatGPTClientFactoryBean.class);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -96,9 +95,9 @@ public class ChatGPTScanner extends ClassPathBeanDefinitionScanner {
                         final String[] namesForType = ((ConfigurableListableBeanFactory) this.registry)
                                 .getBeanNamesForType(clazz);
                         if (namesForType.length == 0) {
-                            ConversationMapperRegistry.registry(method, clazz);
+                            ConversationMapperRegistry.registerMapperClazz(method, clazz);
                         } else {
-                            ConversationMapperRegistry.registryMapperBeanClazz(method, clazz);
+                            ConversationMapperRegistry.registerMapperBeanClazz(method, clazz);
                         }
                     }
                 }
@@ -114,9 +113,17 @@ public class ChatGPTScanner extends ClassPathBeanDefinitionScanner {
             Object settingFactory = annotationAttributes.get("settingFactory");
             if (settingFactory != null) {
                 Class clazz = (Class<? extends OpenAISettingFactory>) settingFactory;
-                final OpenAISettingFactory openAISettingFactory = BeanUtils
-                        .instantiateClass(clazz, OpenAISettingFactory.class);
-                beanDefinition.getPropertyValues().addPropertyValue("openAISettingFactory", openAISettingFactory);
+                final String[] names = ((ConfigurableListableBeanFactory) this.registry).getBeanNamesForType(clazz);
+                
+                if (names.length == 0) {
+                    OpenAISettingFactoryRegistry.registerSettingClazz(actualClazz, clazz);
+                } else {
+                    OpenAISettingFactoryRegistry.registerSettingBeanClazz(actualClazz, clazz);
+                }
+                
+                //                final OpenAISettingFactory openAISettingFactory = BeanUtils
+                //                        .instantiateClass(clazz, OpenAISettingFactory.class);
+                //                beanDefinition.getPropertyValues().addPropertyValue("openAISettingFactory", openAISettingFactory);
                 return;
             }
         }
