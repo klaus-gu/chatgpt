@@ -14,7 +14,6 @@ public class MyOpenAISettingFactory implements OpenAISettingFactory {
     public OpenAISetting getSetting() {
         final OpenAISetting openAISetting = new OpenAISetting();
         openAISetting.apiKey = "sk-7ip********************EqU3AU";
-        openAISetting.enableRequestDebug = true;
         return openAISetting;
     }
 }

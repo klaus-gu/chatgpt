@@ -21,11 +21,9 @@ public class ChatGPTServiceConfigurerTEST {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
         applicationContext.register(ChatGPTServiceConfigurerTEST.class);
         applicationContext.refresh();
-        final ChatGPTScannerConfiguration bean = applicationContext.getBean(ChatGPTScannerConfiguration.class);
         ChatGPTService01 chatGPTService01 = applicationContext.getBean(ChatGPTService01.class);
         final OpenAIResponse<GPT35TurboRequest.Message> chat = chatGPTService01
                 .chat(new GPT35TurboRequest.Message(RoleEnum.USER.getRoleName(), "who are you?"));
-        
         System.out.println(JSON.toJSONString(chat));
         applicationContext.close();
     }
