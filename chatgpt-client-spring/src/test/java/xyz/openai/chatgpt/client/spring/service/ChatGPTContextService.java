@@ -18,6 +18,6 @@ public interface ChatGPTContextService {
     @GPT35Turbo(enableContext = true)
     OpenAIResponse<GPT35TurboRequest.Message> chat(GPT35TurboRequest.Message message);
     
-    @GPT35Turbo
+    @GPT35Turbo(enableContext = true,conversationMapperFactory = MyDefaultGPT35TurboConversationMapperFactory.class)
     OpenAIResponse<GPT35TurboRequest.Message> chat(List<GPT35TurboRequest.Message> message);
 }

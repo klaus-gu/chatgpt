@@ -105,17 +105,17 @@ public class MyDefaultGPT35TurboConversationMapperFactory
     }
   
     public static class MyDefaultGPT35TurboConversationMapper implements ConversationMapper<GPT35TurboRequest.Message> {
-    
+  
         private final ConcurrentHashMap<String, List<GPT35TurboRequest.Message>> conversationContextMap = new ConcurrentHashMap<>();
-    
+  
         public MyDefaultGPT35TurboConversationMapper() {
         }
-    
+  
         @Override
         public List<GPT35TurboRequest.Message> getContext(String conversationId) {
             return conversationContextMap.get(conversationId);
         }
-    
+  
         @Override
         public List<GPT35TurboRequest.Message> appendContext(String conversationId,
                 List<GPT35TurboRequest.Message> newContexts) {
@@ -136,6 +136,6 @@ public class MyDefaultGPT35TurboConversationMapperFactory
 
 #### You can define your own code in method getContext and appendContext.
 
-
 # Integrate with springboot
+
 [https://github.com/klaus-gu/chatgpt/tree/master/chatgpt-client-example/src/main/java/xyz/openai/chatgpt/client/example](https://)

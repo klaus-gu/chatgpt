@@ -8,6 +8,7 @@ import xyz.openai.chatgpt.client.entity.GPT35TurboRequest;
 import xyz.openai.chatgpt.client.entity.OpenAIResponse;
 import xyz.openai.chatgpt.client.spring.conversation.ConversationMapper;
 import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperFactory;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperRegistry;
 import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
 
 import java.lang.annotation.Annotation;
@@ -28,11 +29,9 @@ public class ChatGPTServiceProxyFactory {
     
     private static final Map<String, Object> httpServiceCache = new ConcurrentHashMap<String, Object>();
     
-    public static <T> T getProxy(Class<T> tClass, OpenAISettingFactory openAISettingFactory,
-            Map<Method,ConversationMapper> conversationMapperCache) {
+    public static <T> T getProxy(Class<T> tClass, OpenAISettingFactory openAISettingFactory) {
         return (T) httpServiceCache.computeIfAbsent(tClass.getName(), (t) -> {
-            ChatGPTServiceProxy chatGPTServiceProxy = new ChatGPTServiceProxy(openAISettingFactory,
-                    conversationMapperCache);
+            ChatGPTServiceProxy chatGPTServiceProxy = new ChatGPTServiceProxy(openAISettingFactory);
             return Proxy.newProxyInstance(chatGPTServiceProxy.getClass().getClassLoader(), new Class[] {tClass},
                     chatGPTServiceProxy);
         });
@@ -42,16 +41,9 @@ public class ChatGPTServiceProxyFactory {
         
         private final OpenAISettingFactory openAISettingFactory;
         
-        private final Map<Method, ConversationMapper> conversationMapperCache;
         
         public ChatGPTServiceProxy(OpenAISettingFactory openAISettingFactory) {
-            this(openAISettingFactory, null);
-        }
-        
-        public ChatGPTServiceProxy(OpenAISettingFactory openAISettingFactory,
-                Map<Method, ConversationMapper> conversationMapperCache) {
             this.openAISettingFactory = openAISettingFactory;
-            this.conversationMapperCache = conversationMapperCache;
         }
         
         @Override
@@ -78,7 +70,7 @@ public class ChatGPTServiceProxyFactory {
                 if (annotationAttributes.get("enableContext") != null && annotationAttributes
                         .getBoolean("enableContext")) {
                     
-                    ConversationMapper mapper = conversationMapperCache.get(method);
+                    ConversationMapper mapper = ConversationMapperRegistry.getConversationMapper(method);
                     
                     if (StringUtils.isEmpty(conversationId)) {
                         throw new IllegalArgumentException(
@@ -92,7 +84,7 @@ public class ChatGPTServiceProxyFactory {
                 result = OpenAI.ChatGPT.ChatGPT35Turbo.config(openAISettingFactory.getSetting()).handle(messagesArr);
                 if (annotationAttributes.get("enableContext") != null && annotationAttributes
                         .getBoolean("enableContext")) {
-                    ConversationMapper mapper = conversationMapperCache.get(method);
+                    ConversationMapper mapper = ConversationMapperRegistry.getConversationMapper(method);
                     if (StringUtils.isEmpty(conversationId)) {
                         throw new IllegalArgumentException(
                                 "[@GPT35Turbo] conversationId can not be null when enableContext is enabled");

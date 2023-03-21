@@ -6,6 +6,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperRegistry;
 import xyz.openai.chatgpt.client.spring.core.annotation.ChatGPTScan;
 import xyz.openai.chatgpt.client.spring.core.scan.ChatGPTScannerConfiguration;
 
@@ -31,5 +32,7 @@ public class ChatGPTServiceConfigurer implements ImportBeanDefinitionRegistrar {
             }
             registry.registerBeanDefinition(ChatGPTScannerConfiguration.class.getName(), beanDefinition);
         }
+        BeanDefinition ConversationMapperRegistryBeanDefinition = BeanDefinitionBuilder.rootBeanDefinition(ConversationMapperRegistry.class).getBeanDefinition();
+        registry.registerBeanDefinition(ConversationMapperRegistry.class.getName(),ConversationMapperRegistryBeanDefinition);
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
+import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperRegistry;
 
 /**
  * ${@link ChatGPTScanner} .
@@ -33,7 +34,6 @@ public class ChatGPTScannerConfiguration implements BeanDefinitionRegistryPostPr
     
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory)
             throws BeansException {
-        
     }
     
     public Class<?> getAnnotationClass() {

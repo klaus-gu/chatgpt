@@ -48,7 +48,7 @@ public interface ChatGPTUsageSpecification {
                         "[" + method.getDeclaringClass().getSimpleName() + "#" + method.getName()
                                 + "] The expected request parameter type is GPT35TurboRequest.Message or List<GPT35TurboRequest.Message> when use gpt35turbo model. ");
             }
-            ParameterizedType parameterizedType = (ParameterizedType)actualTypeArguments[0];
+            ParameterizedType parameterizedType = (ParameterizedType) actualTypeArguments[0];
             final Type[] actTypes = parameterizedType.getActualTypeArguments();
             if (actTypes.length != 1) {
                 throw new IllegalArgumentException(
@@ -56,11 +56,12 @@ public interface ChatGPTUsageSpecification {
                                 + "] The expected request parameter type is GPT35TurboRequest.Message or List<GPT35TurboRequest.Message> when use gpt35turbo model. ");
             }
             Type act = actTypes[0];
-            if (!GPT35TurboRequest.Message.class.getTypeName().equals(act.getTypeName())){
-                throw new IllegalArgumentException("[" + method.getDeclaringClass().getSimpleName() + "#" + method.getName()
-                        + "] The expected request parameter type is GPT35TurboRequest.Message or List<GPT35TurboRequest.Message> when use gpt35turbo model. ");
+            if (!GPT35TurboRequest.Message.class.getTypeName().equals(act.getTypeName())) {
+                throw new IllegalArgumentException(
+                        "[" + method.getDeclaringClass().getSimpleName() + "#" + method.getName()
+                                + "] The expected request parameter type is GPT35TurboRequest.Message or List<GPT35TurboRequest.Message> when use gpt35turbo model. ");
             }
-           
+            
         }
         
     }

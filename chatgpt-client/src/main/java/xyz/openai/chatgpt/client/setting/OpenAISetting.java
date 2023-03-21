@@ -30,8 +30,6 @@ public class OpenAISetting {
     
     public String expireTime = "";
     
-    public boolean enableRequestDebug = false;
-    
     public String apiKey = "";
     
     public boolean enableContext = false;
@@ -65,10 +63,9 @@ public class OpenAISetting {
         return "OpenAISetting{" + "readTimeout='" + readTimeout + '\'' + ", connectionTimeout='" + connectionTimeout
                 + '\'' + ", email='" + email + '\'' + ", password='" + password + '\'' + ", enableProxy=" + enableProxy
                 + ", proxyHostname='" + proxyHostname + '\'' + ", proxyPort='" + proxyPort + '\'' + ", accessToken='"
-                + accessToken + '\'' + ", expireTime='" + expireTime + '\'' + ", enableRequestDebug="
-                + enableRequestDebug + ", apiKey='" + apiKey + '\'' + ", enableContext=" + enableContext
-                + ", assistantApiKey='" + assistantApiKey + '\'' + ", enableTokenAuthorization="
-                + enableTokenAuthorization + ", enableApiKeyAuthorization=" + enableApiKeyAuthorization
-                + ", modelToUse=" + modelToUse + ", proxyType=" + proxyType + '}';
+                + accessToken + '\'' + ", expireTime='" + expireTime + '\'' + ", apiKey='" + apiKey + '\''
+                + ", enableContext=" + enableContext + ", assistantApiKey='" + assistantApiKey + '\''
+                + ", enableTokenAuthorization=" + enableTokenAuthorization + ", enableApiKeyAuthorization="
+                + enableApiKeyAuthorization + ", modelToUse=" + modelToUse + ", proxyType=" + proxyType + '}';
     }
 }
