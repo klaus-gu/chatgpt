@@ -5,12 +5,12 @@
     <parent>
         <groupId>xyz.openai</groupId>
         <artifactId>chatgpt</artifactId>
-        <version>${reversion}</version>
+        <version>1.3.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
     <artifactId>chatgpt-client-spring</artifactId>
-    <version>${reversion}</version>
+    <version>1.3.0</version>
     <name>chatgpt-client-spring</name>
     <description>ChatGPT client spring integration</description>
     <properties>

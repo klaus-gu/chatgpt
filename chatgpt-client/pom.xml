@@ -6,11 +6,11 @@
     <parent>
         <groupId>xyz.openai</groupId>
         <artifactId>chatgpt</artifactId>
-        <version>${reversion}</version>
+        <version>1.3.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
-    <version>${reversion}</version>
+    <version>1.3.0</version>
     <artifactId>chatgpt-client</artifactId>
     <name>chatgpt-client</name>
     <description>Client for chatgpt</description>
