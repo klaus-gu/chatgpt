@@ -13,7 +13,6 @@ import xyz.openai.chatgpt.client.spring.core.registry.OpenAISettingFactoryRegist
 /**
  * ${@link xyz.openai.chatgpt.client.spring.core.scan.ChatGPTScannerConfiguration} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class ChatGPTServiceConfigurer implements ImportBeanDefinitionRegistrar {
     

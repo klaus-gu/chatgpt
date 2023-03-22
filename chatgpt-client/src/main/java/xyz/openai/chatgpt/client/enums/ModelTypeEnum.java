@@ -3,7 +3,6 @@ package xyz.openai.chatgpt.client.enums;
 /**
  * 模型类型 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public enum ModelTypeEnum {
     GPT35_TRUBO("gpt-3.5-turbo"),

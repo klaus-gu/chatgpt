@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * GPT35Turbo 模型请求包装 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class GPT35TurboRequest {
     

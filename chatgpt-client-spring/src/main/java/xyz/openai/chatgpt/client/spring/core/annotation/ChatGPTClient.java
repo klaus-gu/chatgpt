@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
 /**
  * Annotate an ChatGPT client service .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = ElementType.TYPE)

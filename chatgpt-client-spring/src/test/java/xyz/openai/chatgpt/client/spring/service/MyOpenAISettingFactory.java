@@ -7,7 +7,6 @@ import xyz.openai.chatgpt.client.spring.core.factory.OpenAISettingFactory;
 /**
  * Mock .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 @Component
 public class MyOpenAISettingFactory implements OpenAISettingFactory {

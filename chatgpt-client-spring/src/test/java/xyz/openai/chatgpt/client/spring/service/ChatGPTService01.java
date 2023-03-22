@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Mock .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 //@ChatGPTClient(settingFactory = MyOpenAISettingFactory.class)
 public interface ChatGPTService01 {

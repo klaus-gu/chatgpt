@@ -5,7 +5,6 @@ import java.util.UUID;
 /**
  * Conversation manage .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class ConversationManager {
     

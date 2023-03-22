@@ -10,7 +10,6 @@ import java.net.Proxy;
 /**
  * Abstract handler for chatgpt request .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 abstract class AbstractGPTHandler<M,R> {
     

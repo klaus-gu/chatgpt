@@ -9,7 +9,6 @@ import java.util.Map;
 /**
  * 请求头构造 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class RequestHeaderBuilder {
     

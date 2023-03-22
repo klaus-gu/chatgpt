@@ -5,7 +5,6 @@ import org.springframework.beans.factory.FactoryBean;
 /**
  * ${@link FactoryBean} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class ChatGPTClientFactoryBean implements FactoryBean {
     

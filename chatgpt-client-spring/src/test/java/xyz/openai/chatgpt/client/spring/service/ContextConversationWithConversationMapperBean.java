@@ -8,7 +8,6 @@ import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
 /**
  * 使用 ${@link xyz.openai.chatgpt.client.spring.conversation.ConversationMapper} 的 spring bean .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 //@ChatGPTClient(settingFactory = MyOpenAISettingFactory.class)
 public interface ContextConversationWithConversationMapperBean {

@@ -5,7 +5,6 @@ import xyz.openai.chatgpt.client.parser.ChatGPTResponseParser;
 /**
  * ${@link ChatGPTResponseParser} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class ChatGPTResponseParserTEST {
     private static final String res = "{\n" + "    \"id\": \"chatcmpl-6uEcFsdssn1pJJXMMjS4gIETUcRgu\",\n"

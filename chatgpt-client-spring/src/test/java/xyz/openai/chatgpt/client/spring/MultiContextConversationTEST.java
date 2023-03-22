@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * TODO .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 @ChatGPTScan(basePackages = "xyz.openai.chatgpt.client.spring.service")
 public class MultiContextConversationTEST {

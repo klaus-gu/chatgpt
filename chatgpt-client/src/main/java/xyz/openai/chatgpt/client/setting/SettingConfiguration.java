@@ -3,7 +3,6 @@ package xyz.openai.chatgpt.client.setting;
 /**
  * Enums .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class SettingConfiguration {
     

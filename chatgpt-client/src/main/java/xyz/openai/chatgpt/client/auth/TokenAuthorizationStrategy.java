@@ -7,7 +7,6 @@ import xyz.openai.chatgpt.client.setting.OpenAISetting;
 /**
  * TOKEN 认证方式 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 class TokenAuthorizationStrategy implements AuthorizationStrategy {
     

@@ -11,7 +11,6 @@ import java.lang.annotation.Target;
 /**
  * Used to process GPT35Turbo model .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

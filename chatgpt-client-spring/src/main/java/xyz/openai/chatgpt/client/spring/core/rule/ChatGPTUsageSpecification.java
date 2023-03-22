@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * Used to validate method witch is annotated by gpt annotation .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public interface ChatGPTUsageSpecification {
     

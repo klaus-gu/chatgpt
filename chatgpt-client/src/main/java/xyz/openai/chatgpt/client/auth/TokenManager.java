@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 /**
  * Used for ChatGPT request header .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class TokenManager {
     

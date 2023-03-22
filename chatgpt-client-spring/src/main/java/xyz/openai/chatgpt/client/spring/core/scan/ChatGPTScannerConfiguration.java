@@ -10,7 +10,6 @@ import xyz.openai.chatgpt.client.spring.conversation.ConversationMapperRegistry;
 /**
  * ${@link ChatGPTScanner} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class ChatGPTScannerConfiguration implements BeanDefinitionRegistryPostProcessor {
     

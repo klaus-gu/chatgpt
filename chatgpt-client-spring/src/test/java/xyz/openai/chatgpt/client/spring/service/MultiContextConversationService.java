@@ -8,7 +8,6 @@ import xyz.openai.chatgpt.client.spring.core.annotation.GPT35Turbo;
 /**
  * 多上下文测试 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 //@ChatGPTClient(settingFactory = MyOpenAISettingFactory.class)
 public interface MultiContextConversationService {

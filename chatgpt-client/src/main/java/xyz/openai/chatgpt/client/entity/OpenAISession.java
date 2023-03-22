@@ -7,7 +7,6 @@ import com.alibaba.fastjson2.JSONObject;
 /**
  * Seesion .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class OpenAISession {
     

@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Registry for ${@link xyz.openai.chatgpt.client.setting.OpenAISetting} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class OpenAISettingFactoryRegistry implements BeanFactoryAware, SmartInitializingSingleton {
     

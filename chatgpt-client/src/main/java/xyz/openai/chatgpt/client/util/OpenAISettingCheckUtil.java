@@ -7,7 +7,6 @@ import xyz.openai.chatgpt.client.setting.OpenAISetting;
 /**
  * 检查设置 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class OpenAISettingCheckUtil {
     

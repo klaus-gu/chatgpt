@@ -10,7 +10,6 @@ import java.util.Map;
 /**
  * GPT proxy .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class GPTHandlerDelegate<M,R> {
     

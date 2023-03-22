@@ -11,7 +11,6 @@ import xyz.openai.chatgpt.client.setting.SettingConfiguration;
 /**
  * ${@link OpenAI} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class OpenAITEST {
     

@@ -7,7 +7,6 @@ import java.net.SocketAddress;
 /**
  * 访问代理 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class OpenAIProxy {
     

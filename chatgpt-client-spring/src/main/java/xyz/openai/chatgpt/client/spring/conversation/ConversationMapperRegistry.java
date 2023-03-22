@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Registry for ConversationMapper .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class ConversationMapperRegistry implements BeanFactoryAware, SmartInitializingSingleton {
     

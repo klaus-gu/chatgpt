@@ -3,9 +3,8 @@ package xyz.openai.chatgpt.client.spring.conversation;
 import java.util.List;
 
 /**
- * TODO .
+ * 会话管理 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public interface ConversationMapper<T> {
     

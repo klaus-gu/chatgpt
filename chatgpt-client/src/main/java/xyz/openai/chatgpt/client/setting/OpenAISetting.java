@@ -8,7 +8,6 @@ import java.net.Proxy;
 /**
  * Configuration for open ai operate .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class OpenAISetting {
     

@@ -4,7 +4,6 @@ import xyz.openai.chatgpt.client.request.RequestBuilder;
 
 /**
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class RequestBuilderTEST {
     

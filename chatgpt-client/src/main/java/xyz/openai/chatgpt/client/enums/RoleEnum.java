@@ -3,7 +3,6 @@ package xyz.openai.chatgpt.client.enums;
 /**
  * 会话角色 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public enum RoleEnum {
     USER("user"),

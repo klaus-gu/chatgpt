@@ -15,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 /**
  * gpt-35-turbo 模型处理 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 class GPT35TurboHandler
         extends AbstractGPTHandler<GPT35TurboRequest.Message, OpenAIResponse<GPT35TurboRequest.Message>> {

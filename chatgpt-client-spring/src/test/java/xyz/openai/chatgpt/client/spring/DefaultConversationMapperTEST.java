@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * ${@link DefaultGPT35TurboConversationMapperFactory} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class DefaultConversationMapperTEST {
     

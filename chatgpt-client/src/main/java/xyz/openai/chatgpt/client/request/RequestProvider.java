@@ -10,7 +10,6 @@ import java.util.Map;
 /**
  * 请求提供 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class RequestProvider<T> {
     

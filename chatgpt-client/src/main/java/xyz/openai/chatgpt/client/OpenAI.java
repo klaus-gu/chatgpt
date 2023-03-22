@@ -11,7 +11,6 @@ import xyz.openai.chatgpt.client.util.OpenAISettingCheckUtil;
 /**
  * OpenAI 开放功能 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class OpenAI {
     

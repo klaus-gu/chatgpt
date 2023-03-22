@@ -3,7 +3,6 @@ package xyz.openai.chatgpt.client.entity;
 /**
  * 自定义异常 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class OpenAIException extends Exception {
     

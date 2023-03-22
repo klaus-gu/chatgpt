@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * 解析 .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class ChatGPTResponseParser {
     

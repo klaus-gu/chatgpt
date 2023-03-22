@@ -23,7 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * ChatGPT http client proxy factory .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class ChatGPTServiceProxyFactory {
     

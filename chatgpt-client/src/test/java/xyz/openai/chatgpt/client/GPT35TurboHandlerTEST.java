@@ -8,7 +8,6 @@ import xyz.openai.chatgpt.client.setting.OpenAISetting;
 /**
  * ${@link GPTHandlerDelegate} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class GPT35TurboHandlerTEST {
     

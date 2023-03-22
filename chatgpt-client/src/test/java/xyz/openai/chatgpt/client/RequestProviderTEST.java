@@ -9,7 +9,6 @@ import xyz.openai.chatgpt.client.setting.OpenAISetting;
 /**
  * ${@link RequestProvider} .
  * @author <a href="mailto:guyue375@outlook.com">Klaus.turbo</a>
- * @program chatgpt
  **/
 public class RequestProviderTEST {
     
