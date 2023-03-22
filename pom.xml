@@ -12,7 +12,7 @@
     
     <packaging>pom</packaging>
     <properties>
-        <reversion>1.0.0-SNAPSHOT</reversion>
+        <reversion>1.2.0</reversion>
         <java.version>1.8</java.version>
         <moshi.version>1.11.0</moshi.version>
         <okhttp.version>3.14.9</okhttp.version>
@@ -29,19 +29,19 @@
             <dependency>
                 <groupId>xyz.openai</groupId>
                 <artifactId>chatgpt-client</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.2.0</version>
             </dependency>
             
             <dependency>
                 <groupId>xyz.openai</groupId>
                 <artifactId>chatgpt-client-spring</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.2.0</version>
             </dependency>
     
             <dependency>
                 <groupId>xyz.openai</groupId>
                 <artifactId>chatgpt-client-example</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.2.0</version>
             </dependency>
             
             <dependency>
@@ -132,5 +132,5 @@
             </plugin>
         </plugins>
     </build>
-
+    
 </project>
