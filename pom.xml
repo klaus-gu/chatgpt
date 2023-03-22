@@ -12,16 +12,14 @@
     
     <packaging>pom</packaging>
     <properties>
-        <reversion>1.0.0-SNAPSHOT</reversion>
-        <java.version>1.8</java.version>
-        <moshi.version>1.11.0</moshi.version>
-        <okhttp.version>3.14.9</okhttp.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
     
     <modules>
         <module>chatgpt-client</module>
         <module>chatgpt-client-spring</module>
-        <module>chatgpt-client-example</module>
     </modules>
     
     <dependencyManagement>
@@ -29,19 +27,13 @@
             <dependency>
                 <groupId>xyz.openai</groupId>
                 <artifactId>chatgpt-client</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${reversion}</version>
             </dependency>
             
             <dependency>
                 <groupId>xyz.openai</groupId>
                 <artifactId>chatgpt-client-spring</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-    
-            <dependency>
-                <groupId>xyz.openai</groupId>
-                <artifactId>chatgpt-client-example</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${reversion}</version>
             </dependency>
             
             <dependency>
@@ -69,18 +61,6 @@
             </dependency>
     
             <dependency>
-                <groupId>com.squareup.moshi</groupId>
-                <artifactId>moshi</artifactId>
-                <version>${moshi.version}</version>
-            </dependency>
-            
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
-            </dependency>
-    
-            <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark</artifactId>
                 <version>0.62.2</version>
@@ -91,13 +71,7 @@
                 <artifactId>hutool-http</artifactId>
                 <version>5.8.15</version>
             </dependency>
-    
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.8.2</version>
-                <scope>test</scope>
-            </dependency>
+            
         </dependencies>
     </dependencyManagement>
     
@@ -125,12 +99,99 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                     <parameters>true</parameters>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    
+    <licenses>
+        <license>
+            <name>Server Side Public License</name>
+            <url>https://www.mongodb.com/licensing/server-side-public-license</url>
+            <distribution>repo</distribution>
+            <comments>A not business-friendly OSS license</comments>
+        </license>
+    </licenses>
+    
+    <scm>
+        <url>https://github.com/klaus-gu/chatgpt</url>
+        <connection>https://github.com/klaus-gu/chatgpt.git</connection>
+    </scm>
+  
+    <developers>
+        <developer>
+            <name>klaus-gu</name>
+            <id>klaus-gu</id>
+            <email>guyue375@outlook.com</email>
+            <roles>
+                <role>Maintainer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 </project>
